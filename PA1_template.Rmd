@@ -5,25 +5,35 @@ output:
     keep_md: true
 ---
 
-
 ## Loading and preprocessing the data
 
-```{r simulation, echo = TRUE}
+```{r question1, echo = TRUE}
 download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip", "data-activity.zip")
 unzip("data-activity.zip", exdir = "DATA")
 activity <- read.csv("./DATA/activity.csv", header = TRUE)
 activity$date <- as.Date(as.character(activity$date), "%Y-%m-%d")
 ```
 ## What is mean total number of steps taken per day?
+```{r question2, echo = TRUE}
+tapply(activity$steps, activity$date, FUN = sum, na.rm = TRUE)
 
-
-
+mean(tapply(activity$steps, activity$date, FUN = sum, na.rm = TRUE), na.rm = TRUE)
+median(tapply(activity$steps, activity$date, FUN = sum, na.rm = TRUE), na.rm = TRUE)
+```
 ## What is the average daily activity pattern?
+```{r question3, echo = TRUE}
+mean(1)
 
-
-
+```
 ## Imputing missing values
+```{r question4, echo = TRUE}
+mean(1)
 
-
-
+```
 ## Are there differences in activity patterns between weekdays and weekends?
+```{r question5, echo = TRUE}
+mean(1)
+
+
+
+```
