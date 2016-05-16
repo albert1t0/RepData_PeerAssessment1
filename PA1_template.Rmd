@@ -8,8 +8,12 @@ output:
 
 ## Loading and preprocessing the data
 
-
-
+```{r simulation, echo = TRUE}
+download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip", "data-activity.zip")
+unzip("data-activity.zip", exdir = "DATA")
+activity <- read.csv("./DATA/activity.csv", header = TRUE)
+activity$date <- as.Date(as.character(activity$date), "%Y-%m-%d")
+```
 ## What is mean total number of steps taken per day?
 
 
