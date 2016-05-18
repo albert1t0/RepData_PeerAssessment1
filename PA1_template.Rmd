@@ -6,7 +6,7 @@ output:
 ---
 
 ## Loading and preprocessing the data
-
+Down load the file. Uncompress and convert date to POSIX format.
 ```{r question1, echo = TRUE}
 download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip", "data-activity.zip")
 unzip("data-activity.zip", exdir = "DATA")
@@ -14,6 +14,7 @@ activity <- read.csv("./DATA/activity.csv", header = TRUE)
 activity$date <- as.Date(as.character(activity$date), "%Y-%m-%d")
 ```
 ## What is mean total number of steps taken per day?
+Generate the histogram. Print the table with steps per days. And print the mean and meadian per day without missing values.
 ```{r question2, echo = TRUE}
 steps.pear.day <- tapply(activity$steps, activity$date, FUN = sum, na.rm = TRUE)
 hist(steps.pear.day, main = "Histogram steps per day", xlab = "Steps per day", col = "green")
@@ -24,12 +25,14 @@ mean.perday
 median.perday
 ```
 ## What is the average daily activity pattern?
+Generate the plot for daily activity pattern and print the inteval with highest value.
 ```{r question3, echo = TRUE}
 steps.pear.interval <- tapply(activity$steps, activity$interval, FUN = mean, na.rm = TRUE)
 plot(names(steps.pear.interval), steps.pear.interval, type = "l", col = "red", main = "Time series")
 sort(steps.pear.interval, decreasing = TRUE)[1]
 ```
 ## Imputing missing values
+Replace al NAs with the steps mean. Generate the histogram and print the mean and median
 ```{r question4, echo = TRUE}
 sum(is.na(activity[,1:dim(activity)[2]]))
 activity.notna <- activity
@@ -40,6 +43,7 @@ mean(steps.pear.day.notna, na.rm = TRUE)
 median(steps.pear.day.notna, na.rm = TRUE)
 ```
 ## Are there differences in activity patterns between weekdays and weekends?
+Make the activity pattern for weekdays and weekends. It seems that there are differences. More activity in upper intervals.
 ```{r question5, echo = TRUE}
 activity.notna$day <- ifelse(weekdays(activity.notna$date) %in% c("sábado", "domingo"), "weekend", "weekday")
 steps.pear.interval.notna <- aggregate(activity.notna$steps, list(activity.notna$interval, activity.notna$day), FUN = mean, na.rm = TRUE)
